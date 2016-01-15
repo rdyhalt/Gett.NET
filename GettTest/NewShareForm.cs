@@ -1,6 +1,6 @@
 ﻿/*
 
-  Copyright (c) 2014 Togocoder
+  Copyright (c) 2016 Togocoder
  
   This program is to illustrate how to use Gett.NET library that uses the Ge.tt API Web Service, http://ge.tt/developers
   Please see copyright text in the source code for Gett.NET.

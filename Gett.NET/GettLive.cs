@@ -1,7 +1,7 @@
 ﻿#region License information
 /*
 
-  Copyright (c) 2014 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
+  Copyright (c) 2016 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
  
   This file is part of Gett.NET library that uses the Ge.tt REST API, http://ge.tt/developers
   
@@ -262,15 +262,21 @@ namespace Gett.Sharing.Live
                 _webSocket.Send(jsonArgument.ToString());
                 _webSocket.Send("ping");
 
-                if (OnOpen != null)
-                    OnOpen(this);
+                Action<GettLive> copyOnOpen = OnOpen;
+                if (copyOnOpen != null)
+                {
+                    copyOnOpen(this);
+                }
             }
             catch (Exception ex)
             {
                 //System.Diagnostics.Debug.WriteLine("OnOpen, handling exception: " + ex.GetType().ToString() + ", " + ex.Message, "WS");
 
-                if (OnError != null)
-                    OnError(this, ex.Message);
+                Action<GettLive, string> copyOnError = OnError;
+                if (copyOnError != null)
+                {
+                    copyOnError(this, ex.Message);
+                }
             }
         }
 
@@ -280,8 +286,11 @@ namespace Gett.Sharing.Live
         private void WebSocket_OnClose(object sender, EventArgs e)
         {
             //System.Diagnostics.Debug.WriteLine("OnClose event");
-            if (OnClose != null)
-                OnClose(this);
+            Action<GettLive> copyOnClose = OnClose;
+            if (copyOnClose != null)
+            {
+                copyOnClose(this);
+            }
         }
 
         /// <summary>
@@ -290,8 +299,12 @@ namespace Gett.Sharing.Live
         private void WebSocket_OnError(object sender, string eventdata)
         {
             //System.Diagnostics.Debug.WriteLine("OnError event: [" + eventdata + "]", "WS");
-            if (OnError != null)
-                OnError(this, eventdata);
+
+            Action<GettLive, string> copyOnError = OnError;
+            if (copyOnError != null)
+            {
+                copyOnError(this, eventdata);
+            }
         }
 
         /// <summary>
@@ -351,9 +364,10 @@ namespace Gett.Sharing.Live
                 System.Diagnostics.Debug.WriteLine("WebSocket_OnMessage, handling exception: " + ex.GetType() + ", " + ex.Message);
             }
 
-            if (OnMessage != null)
+            Action<GettLive, string> copyOnMessage = OnMessage;
+            if (copyOnMessage != null)
             {
-                OnMessage(this, eventdata);
+                copyOnMessage(this, eventdata);
             }
 
         }

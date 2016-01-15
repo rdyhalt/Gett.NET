@@ -1,7 +1,7 @@
 ﻿#region License information
 /*
 
-  Copyright (c) 2014 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
+  Copyright (c) 2016 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
  
   This file is part of Gett.NET library that uses the Ge.tt REST API, http://ge.tt/developers
 
@@ -293,7 +293,7 @@ namespace Gett.Sharing
         /// <returns>A Task, it can be used for async/await statments</returns>
         public Task<bool> RefreshLoginAsync()
         {
-            return Task.Factory.StartNew(() => RefreshLogin());
+            return Task.Factory.StartNew(RefreshLogin);
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace Gett.Sharing
         /// <returns>A Task, it can be used for async/await statments</returns>
         public Task<bool> RefreshMeAsync()
         {
-            return Task.Factory.StartNew(() => RefreshMe());
+            return Task.Factory.StartNew(RefreshMe);
         }
 
         /// <summary>

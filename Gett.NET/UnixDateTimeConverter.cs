@@ -1,7 +1,7 @@
 ﻿#region License information
 /*
 
-  Copyright (c) 2014 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
+  Copyright (c) 2016 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
  
   This file is part of Gett.NET library that uses the Ge.tt REST API, http://ge.tt/developers
 
@@ -42,7 +42,7 @@ namespace Newtonsoft.Json.Converters
         {
             if (reader.TokenType != JsonToken.Integer)
             {
-                throw new Exception(String.Format("Unexpected token parsing date. Expected Integer, got {0}.", reader.TokenType));
+                throw new Exception(string.Format("Unexpected token parsing date. Expected Integer, got {0}.", reader.TokenType));
             }
 
             var ticks = (long)reader.Value;

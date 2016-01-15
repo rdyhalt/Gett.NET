@@ -1,7 +1,7 @@
 ﻿#region License information
 /*
 
-  Copyright (c) 2014 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
+  Copyright (c) 2016 Togocoder (http://www.codeproject.com/Members/Kim-Togo)
  
   This file is part of Gett.NET library that uses the Ge.tt REST API, http://ge.tt/developers
 
@@ -60,7 +60,7 @@ namespace Gett.Sharing
     /// Represent all shares on Ge.tt for user.
     /// http://ge.tt/developers - REST API for Ge.tt Web service - share API.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("Shares for user = {gettUser.Me.FullName}, {gettUser.Me.Email}")]
+    [System.Diagnostics.DebuggerDisplay("Shares for user = {_gettUser.Me.FullName}, {_gettUser.Me.Email}")]
     public class GettShares : GettBaseUri
     {
         #region HashCode and Equals overrides
@@ -275,7 +275,7 @@ namespace Gett.Sharing
         /// <returns>A Task, it can be used for async/await statments</returns>
         public Task<GettShare[]> GetSharesAsync()
         {
-            return Task.Factory.StartNew(() => GetShares());
+            return Task.Factory.StartNew(GetShares);
         }
 
         /// <summary>
