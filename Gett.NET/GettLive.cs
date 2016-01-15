@@ -183,7 +183,8 @@ namespace Gett.Sharing.Live
                 }
 
                 Session = session;
-                _webSocket = new WebSocket(GettBaseUri.BaseUriLive, "wss");
+                //_webSocket = new WebSocket(GettBaseUri.BaseUriLive, "wss");
+                _webSocket = new WebSocket(GettBaseUri.BaseUriLive);
                 _webSocket.OnOpen += WebSocket_OnOpen;
                 _webSocket.OnClose += WebSocket_OnClose;
                 _webSocket.OnError += WebSocket_OnError;
@@ -296,22 +297,24 @@ namespace Gett.Sharing.Live
         /// <summary>
         /// On WebSocket error, connection abort etc.
         /// </summary>
-        private void WebSocket_OnError(object sender, string eventdata)
+        private void WebSocket_OnError(object sender, ErrorEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine("OnError event: [" + eventdata + "]", "WS");
+            System.Diagnostics.Debug.WriteLine("OnError event: [" + e.Message + "]", "WS");
 
             Action<GettLive, string> copyOnError = OnError;
             if (copyOnError != null)
             {
-                copyOnError(this, eventdata);
+                copyOnError(this, e.Message);
             }
         }
 
         /// <summary>
         /// On WebSocket new message received.
         /// </summary>
-        private void WebSocket_OnMessage(object sender, string eventdata)
+        private void WebSocket_OnMessage(object sender, MessageEventArgs e)
         {
+            string eventdata = e.Data;
+
             // Base JSON message format, except for "ping" message.
             //{
             //  "type":"the message type"
@@ -369,8 +372,73 @@ namespace Gett.Sharing.Live
             {
                 copyOnMessage(this, eventdata);
             }
-
         }
+
+
+        /// <summary>
+        /// On WebSocket new message received.
+        /// </summary>
+        //private void WebSocket_OnMessage(object sender, string eventdata)
+        //{
+        //    // Base JSON message format, except for "ping" message.
+        //    //{
+        //    //  "type":"the message type"
+        //    //}
+        //    //System.Diagnostics.Debug.WriteLine("WebSocket_OnMessage event: [" + eventdata + "]");
+        //    try
+        //    {
+        //        // Got a "ping" message from Live API
+        //        if (eventdata == "ping")
+        //        {
+        //            // Send "pong" message, we are still alive.
+        //            _webSocket.Send("pong");
+        //            LastReceived = DateTime.Now;
+        //        }
+        //        else if (eventdata == "pong")
+        //        {
+        //            // Got a "pong" message for ower own "ping" message.
+        //            LastReceived = DateTime.Now;
+        //        }
+        //        else
+        //        {
+        //            try
+        //            {
+        //                JObject jsonResponse = JObject.Parse(eventdata);
+        //                LiveFileEventInfo fileLiveEvent = null;
+
+        //                // What type of Live event?
+        //                switch (jsonResponse["type"].ToString())
+        //                {
+        //                    case "download": fileLiveEvent = JsonConvert.DeserializeObject<LiveFileEventInfo>(eventdata); break; // Download event.
+        //                    case "storagelimit": fileLiveEvent = JsonConvert.DeserializeObject<LiveFileEventInfo>(eventdata); break; // Storagelimit event.
+        //                    case "filestat": fileLiveEvent = JsonConvert.DeserializeObject<LiveFileEventInfo>(eventdata); break; // Filestatus event.
+        //                    case "violatedterms": fileLiveEvent = JsonConvert.DeserializeObject<LiveFileEventInfo>(eventdata); break; // Violated terms event.
+        //                }
+
+        //                if (fileLiveEvent != null)
+        //                {
+        //                    LastReceived = DateTime.Now;
+        //                    OnFileEvent(fileLiveEvent);
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                System.Diagnostics.Debug.WriteLine("WebSocket_OnMessage, Json exception: " + ex.GetType() + ", " + ex.Message);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Diagnostics.Debug.WriteLine("WebSocket_OnMessage, handling exception: " + ex.GetType() + ", " + ex.Message);
+        //    }
+
+        //    Action<GettLive, string> copyOnMessage = OnMessage;
+        //    if (copyOnMessage != null)
+        //    {
+        //        copyOnMessage(this, eventdata);
+        //    }
+
+        //}
         #endregion
 
         #region Events from Live API
