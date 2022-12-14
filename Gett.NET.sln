@@ -1,23 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gett.NET", "Gett.NET\Gett.NET.csproj", "{74B3E5C0-96A9-48C7-9757-A80C20F60413}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettTest", "GettTest\GettTest.csproj", "{499B247D-8FA0-45C0-88BE-23AD821F3700}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://togo.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Gett.NET\\Gett.NET.csproj
-		SccProjectName1 = Gett.NET
-		SccLocalPath1 = Gett.NET
-		SccProjectUniqueName2 = GettTest\\GettTest.csproj
-		SccProjectName2 = GettTest
-		SccLocalPath2 = GettTest
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -50,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09124ACB-FD51-45A4-B1B1-4AA23EFCBC4B}
 	EndGlobalSection
 EndGlobal
